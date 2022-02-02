@@ -1,7 +1,3 @@
-const EMAIL_FIELD_PATH = 'div.reg-form-body > div:nth-child(1) > input';
-const CONFIRM_EMAIL_FIELD_PATH = 'div.reg-form-body > div:nth-child(2) > input';
-const BADGE_EMAIL_FIELD = 'input[name="email"]';
-
 function setNativeValue(element, value) {
   let lastValue = element.value;
   element.value = value;
@@ -26,6 +22,10 @@ function generateEmail() {
 }
 
 function fillAboutYouInputsWithEmails(email) {
+  const EMAIL_FIELD_PATH = 'div.reg-form-body > div:nth-child(1) > input';
+  const CONFIRM_EMAIL_FIELD_PATH =
+    'div.reg-form-body > div:nth-child(2) > input';
+
   const emailField = document.querySelector(EMAIL_FIELD_PATH);
 
   if (emailField) {
@@ -40,8 +40,15 @@ function fillAboutYouInputsWithEmails(email) {
 }
 
 function fillBadgesWithEmail() {
+  const BADGE_EMAIL_FIELD = 'input[name="email"]';
+
   const emails = document.querySelectorAll(BADGE_EMAIL_FIELD);
-  emails.forEach((field) => setNativeValue(field, generateEmail()));
+  if (emails && emails.length > 0) {
+    emails.forEach((field) => {
+      const newEmail = generateEmail();
+      setNativeValue(field, newEmail);
+    });
+  }
 }
 
 function main() {
