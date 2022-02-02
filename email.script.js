@@ -30,12 +30,14 @@ function fillAboutYouInputsWithEmails(email) {
 
   if (emailField) {
     setNativeValue(emailField, email);
+    emailField.disabled = true;
   }
 
   const confirmEmailField = document.querySelector(CONFIRM_EMAIL_FIELD_PATH);
 
   if (confirmEmailField) {
     setNativeValue(confirmEmailField, email);
+    confirmEmailField.disabled = true;
   }
 }
 
@@ -47,6 +49,7 @@ function fillBadgesWithEmail() {
     emails.forEach((field) => {
       const newEmail = generateEmail();
       setNativeValue(field, newEmail);
+      field.disabled = true;
     });
   }
 }
