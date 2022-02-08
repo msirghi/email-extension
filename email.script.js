@@ -12,13 +12,16 @@ function setNativeValue(element, value) {
   element.dispatchEvent(event);
 }
 
-function generateEmail() {
+function generateEmail(domain, pattern) {
   const chars = 'abcdefghijklmnopqrstuvwxyz1234567890';
   let string = '';
-  for (let i = 0; i < 15; i++) {
+  for (let i = 0; i < 10; i++) {
     string += chars[Math.floor(Math.random() * chars.length)];
   }
-  return string + '@fakemail.com';
+  if (pattern) {
+    string = `${pattern}-${string}`;
+  }
+  return `${string}@${domain}`;
 }
 
 function fillAboutYouInputsWithEmails(email) {
@@ -41,22 +44,41 @@ function fillAboutYouInputsWithEmails(email) {
   }
 }
 
-function fillBadgesWithEmail() {
+function fillBadgesWithEmail(defaultDomain, predefinedPattern) {
   const BADGE_EMAIL_FIELD = 'input[name="email"]';
 
   const emails = document.querySelectorAll(BADGE_EMAIL_FIELD);
   if (emails && emails.length > 0) {
     emails.forEach((field) => {
-      const newEmail = generateEmail();
+      const newEmail = generateEmail(defaultDomain, predefinedPattern);
       setNativeValue(field, newEmail);
       field.disabled = true;
     });
   }
 }
 
-function main() {
-  fillAboutYouInputsWithEmails(generateEmail());
-  fillBadgesWithEmail();
+function getStorageData(key) {
+  return new Promise((resolve, reject) =>
+    chrome.storage.sync.get(key, (result) => resolve(result))
+  );
+}
+
+async function main() {
+  let defaultDomain = '@fakeemail.com';
+  let predefinedPattern = '';
+
+  const { domain } = await getStorageData('domain');
+  if (domain) {
+    defaultDomain = domain;
+  }
+
+  const { pattern } = await getStorageData('pattern');
+  if (pattern) {
+    predefinedPattern = pattern;
+  }
+
+  fillAboutYouInputsWithEmails(generateEmail(defaultDomain, predefinedPattern));
+  fillBadgesWithEmail(defaultDomain, predefinedPattern);
 }
 
 main();

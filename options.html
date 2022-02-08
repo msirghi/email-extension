@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css">
+    <title>Options</title>
+</head>
+<body>
+    <div class="title">Options</div>
+    <div class="default-values">
+        <div>If there are no options specified, the following values will be used:</div>
+        <div><b>Domain</b>: fakeemail.com</div>
+        <div><b>Pattern</b>: random string</div>
+        <div>Note: all spaces will be removed.</div>
+    </div>
+    <div class="form">
+        <input class="input" placeholder="Email domain" id="domain-field" />
+        <div class="helper-text">
+            e.g email@<b>domain.com</b></span>
+        </div>
+        <input class="input" placeholder="Email pattern" id="pattern-field" />
+        <div class="helper-text">
+            e.g. <b>pattern</b><span>-{random-text}@domain.com</span>
+        </div>
+        <button class="button" id="save-button">Save</button>
+    </div>
+    <script type="text/javascript" src="options.script.js"></script>
+</body>
+</html>
