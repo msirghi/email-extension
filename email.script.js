@@ -12,6 +12,15 @@ function setNativeValue(element, value) {
   element.dispatchEvent(event);
 }
 
+function generatePhoneNumber() {
+  const dropdown = document.getElementById('input-dropdown-addon');
+  if (dropdown) {
+    dropdown.click();
+    document.querySelector('.country-code-item > a').click();
+    setNativeValue(document.getElementsByClassName('telephone-input')[0], '077 171 0515');
+  }
+}
+
 function generateEmail(domain, pattern) {
   const chars = 'abcdefghijklmnopqrstuvwxyz1234567890';
   let string = '';
@@ -79,6 +88,7 @@ async function main() {
 
   fillAboutYouInputsWithEmails(generateEmail(defaultDomain, predefinedPattern));
   fillBadgesWithEmail(defaultDomain, predefinedPattern);
+  generatePhoneNumber();
 }
 
 main();
