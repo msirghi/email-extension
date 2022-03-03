@@ -53,7 +53,7 @@ function fillAboutYouInputsWithEmails(email) {
   }
 }
 
-function fillBadgesWithEmail(defaultDomain, predefinedPattern) {
+async function fillBadgesWithEmail(defaultDomain, predefinedPattern) {
   const BADGE_EMAIL_FIELD = 'input[name="email"]';
 
   const emails = document.querySelectorAll(BADGE_EMAIL_FIELD);
@@ -64,6 +64,7 @@ function fillBadgesWithEmail(defaultDomain, predefinedPattern) {
       field.disabled = true;
     });
   }
+  Promise.resolve();
 }
 
 function getStorageData(key) {
@@ -87,7 +88,8 @@ async function main() {
   }
 
   fillAboutYouInputsWithEmails(generateEmail(defaultDomain, predefinedPattern));
-  fillBadgesWithEmail(defaultDomain, predefinedPattern);
+  await fillBadgesWithEmail(defaultDomain, predefinedPattern);
+  generatePhoneNumber();
   generatePhoneNumber();
 }
 

@@ -1,14 +1,18 @@
 {
   "manifest_version": 2,
-
   "name": "Email filler",
   "description": "Generate email and fill in the fields",
-  "version": "1.0",
+  "version": "1.1",
   "background": {
     "scripts": ["index.js"]
   },
   "browser_action": {
     "default_icon": "./icons/logo.png"
+  },
+  "icons": {
+    "16": "./icons/logo.png",
+    "48": "./icons/logo.png",
+    "128": "./icons/logo.png"
   },
   "permissions": ["activeTab", "storage"],
   "options_page": "options.html"
